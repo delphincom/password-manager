@@ -38,12 +38,28 @@ def pass_gen(length,chr):
         pass_lst.append(s)
     return pass_lst
 p = pass_gen(pass_len,chars)
-print(p)
+names_passwords = []
+print("Here your passwords:",p)
+
+add_name = input("Add an names to passwords?(y/n)")
+if add_name.lower() == 'y':
+    for n in p:
+        print("Add a name to ","'",n,"'",":",sep='')
+        name = input("")
+        names_passwords.append(name+':'+n)
+    for n in names_passwords:
+        print(n)
 write_answ = input("Write passwords to file?(y/n)")
-file_name = input("Enter the file name to write:")
-if write_answ.lower() == 'y':
+
+if write_answ.lower() == 'y' and add_name.lower() == 'n':
+    file_name = input("Enter the file name to write passwords:")
     file_passw = open(file_name,'a')
     for i in p:
-        file_passw.write(' '+i+' ,')
+        file_passw.write(i+'\n')
     file_passw.close
-
+if write_answ.lower() == 'y' and add_name.lower() == 'y':
+    file_name = input("Enter the file name to write passwords:")
+    file_passw = open(file_name,'a')
+    for i in names_passwords:
+        file_passw.write(i+'\n')
+    file_passw.close
